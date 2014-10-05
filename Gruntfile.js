@@ -148,6 +148,16 @@ module.exports = function ( grunt ) {
             expand: true
           }
         ]
+      },
+      deploy: {
+        files: [
+          {
+            src: [ '**' ],
+            dest: '<%= deploy_dir %>',
+            cwd: '<%= build_dir %>',
+            expand: true
+          }
+        ]
       }
     },
 
@@ -565,6 +575,8 @@ module.exports = function ( grunt ) {
   grunt.registerTask( 'compile', [
     'less:compile', 'copy:compile_assets', 'ngmin', 'concat:compile_js', 'uglify', 'index:compile'
   ]);
+
+  grunt.registerTask( 'deploy', ['copy:deploy']);
 
   /**
    * A utility function to get all app JavaScript sources.
