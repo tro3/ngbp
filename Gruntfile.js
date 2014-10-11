@@ -18,6 +18,8 @@ module.exports = function ( grunt ) {
   grunt.loadNpmTasks('grunt-karma');
   grunt.loadNpmTasks('grunt-ngmin');
   grunt.loadNpmTasks('grunt-html2js');
+  grunt.loadNpmTasks('grunt-protractor-runner');
+
 
   /**
    * Load in our build configuration file.
@@ -363,6 +365,20 @@ module.exports = function ( grunt ) {
       }
     },
 
+    protractor: {
+        options: {
+            keepAlive: true,
+            noColor: false
+        },
+        all: {
+            options: {
+                configFile: "e2e/e2e.conf.coffee", // Target-specific config file
+                //args:  {} # Target-specific arguments
+            }
+        }
+    },
+    
+    
     /**
      * The `index` task compiles the `index.html` file as a Grunt template. CSS
      * and JS files co-exist here but they get split apart later.

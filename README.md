@@ -377,3 +377,14 @@ of you!
 
 So join the team! We're good people.
 
+
+# App setup
+```
+npm install
+
+bower install
+
+<add live reload if needed>
+
+node_modules/grunt-protractor-runner/node_modules/.bin/webdriver-manager update
+```
