@@ -12,8 +12,7 @@
  #* specified, as shown below.
 
 angular.module( 'ngBoilerplate.home', [
-  'ui.router',
-  'plusOne'
+  'ui.router'
 ])
 
  #* Each section or module of the site can also have its own routes. AngularJS
