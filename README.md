@@ -389,6 +389,6 @@ bower install
 node_modules/grunt-protractor-runner/node_modules/.bin/webdriver-manager update
 
 grunt watch <build>
-grunt protractor
+grunt e2e
 grunt deploy
 ```

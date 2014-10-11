@@ -592,7 +592,8 @@ module.exports = function ( grunt ) {
     'less:compile', 'copy:compile_assets', 'ngmin', 'concat:compile_js', 'uglify', 'index:compile'
   ]);
 
-  grunt.registerTask( 'deploy', ['copy:deploy']);
+  grunt.registerTask('deploy', ['copy:deploy']);
+  grunt.registerTask('e2e', ['protractor:all']);
 
   /**
    * A utility function to get all app JavaScript sources.
