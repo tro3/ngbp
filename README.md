@@ -387,4 +387,8 @@ bower install
 <add live reload if needed>
 
 node_modules/grunt-protractor-runner/node_modules/.bin/webdriver-manager update
+
+grunt watch <build>
+grunt protractor
+grunt deploy
 ```
