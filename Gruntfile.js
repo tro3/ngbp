@@ -372,7 +372,7 @@ module.exports = function ( grunt ) {
         },
         all: {
             options: {
-                configFile: "e2e/e2e.conf.coffee", // Target-specific config file
+                configFile: "e2e/e2e.conf.coffee" // Target-specific config file
                 //args:  {} # Target-specific arguments
             }
         }

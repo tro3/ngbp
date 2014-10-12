@@ -384,11 +384,15 @@ npm install
 
 bower install
 
-<add live reload if needed>
-
 node_modules/grunt-protractor-runner/node_modules/.bin/webdriver-manager update
 
-grunt watch <build>
+<modify deploy_dir in build.config.js>
+<add live reload if needed>
+
+grunt watch or grunt build
+
+python e2e\testserver.py
 grunt e2e
+
 grunt deploy
 ```
