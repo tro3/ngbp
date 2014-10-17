@@ -378,7 +378,12 @@ of you!
 So join the team! We're good people.
 
 
+
+
 # App setup
+
+[Angular Best Practice Guidelines for Project Structure](http://blog.angularjs.org/2014/02/an-angularjs-style-guide-and-best.html)
+
 ```
 npm install
 
