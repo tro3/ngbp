@@ -1,8 +1,8 @@
-angular.module( 'ngBoilerplate', [
+angular.module( 'appTop', [
   'templates-app',
   'templates-common',
-  'ngBoilerplate.home',
-  'ngBoilerplate.about',
+  'app.home',
+  'app.about',
   'ui.router'
 ])
 
@@ -13,7 +13,7 @@ angular.module( 'ngBoilerplate', [
 .run( () ->
 )
 
-.controller('AppCtrl', ($scope, $location) ->
+.controller('appCtrl', ($scope, $location) ->
   $scope.$on('$stateChangeSuccess', (event, toState, toParams,
                                      fromState, fromParams) ->
     if angular.isDefined(toState.data.pageTitle)

@@ -4,7 +4,7 @@
  #* automatically.
 
 describe( 'home section', () ->
-  beforeEach(module('ngBoilerplate.home'))
+  beforeEach(module('app.home'))
 
   it( 'should have a dummy test', () ->
     expect( true ).toBeTruthy()
