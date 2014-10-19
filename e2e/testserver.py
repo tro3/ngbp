@@ -9,8 +9,8 @@ import posixpath
 import urllib
 
 
-item_pat = re.compile("/api/([^ ]+)/([^ ]+)/?")
-list_pat = re.compile("/api/([^ ]+)/?")
+item_pat = re.compile("/api/([^ ?]+)/([^ ?]+)/?(\?.*)?")
+list_pat = re.compile("/api/([^ ?]+)/?(\?.*)?")
 
 
 running = True
@@ -32,7 +32,7 @@ class Handler(SimpleHTTPServer.SimpleHTTPRequestHandler):
             globals()[self.path[2:]]()
             return
         elif item_pat.match(self.path):
-            coll, _id = item_pat.match(self.path).groups()
+            coll, _id, params = item_pat.match(self.path).groups()
             _id = int(_id)
             self.send_response(200)
             self.send_header("Content-type", 'application/json')
@@ -41,7 +41,7 @@ class Handler(SimpleHTTPServer.SimpleHTTPRequestHandler):
             self.wfile.write(item_resp(item))
             return
         elif list_pat.match(self.path):
-            coll, = list_pat.match(self.path).groups()
+            coll, params = list_pat.match(self.path).groups()
             self.send_response(200)
             self.send_header("Content-type", 'application/json')
             self.end_headers()
