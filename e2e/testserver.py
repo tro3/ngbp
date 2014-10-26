@@ -30,6 +30,7 @@ class Handler(SimpleHTTPServer.SimpleHTTPRequestHandler):
         
         if self.path.startswith("/_"):
             globals()[self.path[2:]]()
+            self.send_response(204)
             return
         elif item_pat.match(self.path):
             coll, _id, params = item_pat.match(self.path).groups()
