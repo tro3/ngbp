@@ -12,14 +12,14 @@ module.exports = function ( grunt ) {
   grunt.loadNpmTasks('grunt-contrib-uglify');
   grunt.loadNpmTasks('grunt-contrib-coffee');
   grunt.loadNpmTasks('grunt-contrib-less');
-  grunt.loadNpmTasks('grunt-conventional-changelog');
+  grunt.loadNpmTasks('grunt-contrib-jade');
   grunt.loadNpmTasks('grunt-bump');
   grunt.loadNpmTasks('grunt-coffeelint');
   grunt.loadNpmTasks('grunt-karma');
   grunt.loadNpmTasks('grunt-ngmin');
   grunt.loadNpmTasks('grunt-html2js');
   grunt.loadNpmTasks('grunt-protractor-runner');
-
+  grunt.loadNpmTasks('grunt-newer');
 
   /**
    * Load in our build configuration file.
@@ -45,22 +45,9 @@ module.exports = function ( grunt ) {
     meta: {
       banner: 
         '/**\n' +
-        ' * <%= pkg.name %> - v<%= pkg.version %> - <%= grunt.template.today("yyyy-mm-dd") %>\n' +
-        ' * <%= pkg.homepage %>\n' +
-        ' *\n' +
-        ' * Copyright (c) <%= grunt.template.today("yyyy") %> <%= pkg.author %>\n' +
-        ' * Licensed <%= pkg.licenses.type %> <<%= pkg.licenses.url %>>\n' +
+        ' * Build: <%= grunt.template.today("yyyy-mm-dd") %>\n' +
+        ' * Copyright (c) <%= grunt.template.today("yyyy") %> Trey Roessig\n' +
         ' */\n'
-    },
-
-    /**
-     * Creates a changelog on a new version.
-     */
-    changelog: {
-      options: {
-        dest: 'CHANGELOG.md',
-        template: 'changelog.tpl'
-      }
     },
 
     /**
@@ -156,7 +143,7 @@ module.exports = function ( grunt ) {
           {
             src: [ '**' ],
             dest: '<%= deploy_dir %>',
-            cwd: '<%= build_dir %>',
+            cwd: '<%= compile_dir %>',
             expand: true
           }
         ]
@@ -218,6 +205,21 @@ module.exports = function ( grunt ) {
       }
     },
 
+    jade: {
+      compile: {
+        options: {
+            client: false,
+            pretty: true
+        },
+        files: [ {
+          src: "src/**/*.jade",
+          expand: true,
+          ext: ".tpl.html"
+        } ]
+      }
+    },
+
+    
     /**
      * `ng-min` annotates the sources before minifying. That is, it allows us
      * to code without the array syntax.
@@ -466,6 +468,13 @@ module.exports = function ( grunt ) {
           livereload: false
         }
       },
+      
+      jadesrc: {
+        files: [ 
+          'src/**/*.jade'
+        ],
+        tasks: [ 'newer:jade' ]        
+      },
 
       /**
        * When our JavaScript source files change, we want to run lint them and
@@ -578,7 +587,7 @@ module.exports = function ( grunt ) {
    * The `build` task gets your app ready to run for development and testing.
    */
   grunt.registerTask( 'build', [
-    'clean', 'html2js', 'jshint', 'coffeelint', 'coffee', 'less:build',
+    'clean', 'jade', 'html2js', 'jshint', 'coffeelint', 'coffee', 'less:build',
     'concat:build_css', 'copy:build_app_assets', 'copy:build_vendor_assets',
     'copy:build_appjs', 'copy:build_vendorjs', 'index:build', 'karmaconfig',
     'karma:continuous' 
